@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const helmet = require("helmet");
 const cors = require("cors");
+require("dotenv").config();
 
 //server
 const server = express();

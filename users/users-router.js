@@ -1,10 +1,10 @@
 const express = require("express");
-const { orWhereNotExists } = require("../database/dbconfig");
+const { restricted } = require("../middleware/restricted-middleware");
 const router = express.Router();
 const Users = require("./users-model");
 
 //GET /api/users
-router.get("/", (req, res, next) => {
+router.get("/", restricted(), (req, res, next) => {
   Users.find()
     .then((user) => {
       console.log(user);
