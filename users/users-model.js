@@ -9,7 +9,7 @@ module.exports = {
 
 //find all users on /api/users
 function find() {
-  return db("users").select("id", "username", "password").orderBy("id");
+  return db("users").select("id", "username", "role").orderBy("id");
 }
 
 //find by ID

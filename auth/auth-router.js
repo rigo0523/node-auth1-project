@@ -12,15 +12,14 @@ router.post("/register", (req, res, next) => {
   //
   const user = req.body;
   const hashedPassword = bcrypt.hashSync(user.password, 10);
+  user.password = hashedPassword;
 
-  Users.add({
-    username: user.username,
-    password: hashedPassword,
-  })
+  Users.add(user)
     .then((newUser) => {
       console.log("newUser-->", newUser);
       // a jwt should be generated
       const token = generateToken(newUser);
+
       newUser
         ? res.status(201).json({ new_user: newUser, token })
         : res.status(400).json({ error: `Can't register that users` });
@@ -70,19 +69,20 @@ router.get("/logout", (req, res) => {
   }
 });
 
+//GET TOKEN FUNCTION
 function generateToken(user) {
-  //header payload and verfiy signature
-  //payload -> username, id
+  //payload
   const payload = {
-    sub: user.id,
-    username: user.username,
+    subID: user.id,
+    name: user.username,
+    role: user.role,
   };
-  // v signature -> a secret
+  //options, expires in 1 day
   const options = {
-    expiresIn: "100", //millseconds
+    expiresIn: "1d",
   };
 
-  //return the paylod, secret from ENV file and options duration in time
+  //sign and return jwt.sign with all 3 payload, secret and options
   return jwt.sign(payload, process.env.JWT_SECRET, options);
 }
 
