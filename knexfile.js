@@ -7,11 +7,11 @@ module.exports = {
       filename: "./database/userAuth.db3",
     },
     useNullAsDefault: true, // a flat required for SQLITE
-  },
-  seeds: {
-    directory: "./database/seeds",
-  },
-  migrations: {
-    directory: "./database/migrations",
+    seeds: {
+      directory: "./database/seeds",
+    },
+    migrations: {
+      directory: "./database/migrations",
+    },
   },
 };
