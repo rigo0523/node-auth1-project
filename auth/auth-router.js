@@ -4,14 +4,21 @@ const bcrypt = require("bcryptjs");
 
 const Users = require("../users/users-model");
 
+//POST USER / REGISTER/LOGIN
+// {
+// 	"username": "test1",
+// 	"password": "test1"
+// }
+
 //POST /api/auth/register
 router.post("/register", (req, res) => {
   //get credentials from body, can be the form with username and password
   const { username, password } = req.body;
+  //can also do let user = req.body///////////////////
+  //-------user.password = hashedpassword
   //make a hash by using BCRYPT, hash takes raw password and number of rounds ,
   //10 is recommended, it is multipled by 2 so 2 to the power of 10 2^10
   const hashPassword = bcrypt.hashSync(password, 10);
-
   Users.add({
     username: username,
     password: hashPassword, // add the hashpassword to req.bod.password
@@ -34,13 +41,12 @@ router.post("/login", (req, res) => {
   //in the DB as {id: 1, username: "", password: ""} as an example
   //whatever you have in your table is what you request from the body
   const { username, password } = req.body;
-
   //now we check credentials of username and password using bcrypt,
   //we will get the hash from the db USERS TABLE
   Users.findBy({ username: username })
     .first()
     .then((user) => {
-      console.log(user, "user in login");
+      console.log("user Login----->", user);
       //we are now finding by the 1st index in the array of users, .FIRST()
       //makes this happen since we are only filtering to get one object
       //from the list of users
@@ -49,7 +55,7 @@ router.post("/login", (req, res) => {
       if (user && bcrypt.compareSync(password, user.password)) {
         //save the user to the session
         req.session.user = user;
-        console.log(req.session, "req session in login for user");
+        console.log("req.session.user-login----->", req.session);
         //we now send the cookie session and create one by sending to req.session
         res
           .status(200)
@@ -68,6 +74,7 @@ router.post("/login", (req, res) => {
 
 //GET LOGOUT /api/auth/logout
 //use this to logout out of the api
+//this works with SESSIONS
 router.get("/logout", (req, res) => {
   console.log("logging out endpoint");
   if (req.session) {

@@ -8,7 +8,7 @@ const Users = require("./users-model");
 router.get("/", restrictedUsers(), (req, res) => {
   Users.find()
     .then((users) => {
-      console.log(users, "users in /api/users");
+      // console.log(users, "users in /api/users");
       res.json(users);
     })
     .catch((err) => {
