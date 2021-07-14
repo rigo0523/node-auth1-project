@@ -6,6 +6,6 @@ exports.seed = function (knex) {
     { notes: faker.random.words(), user_id: 1 },
     { notes: faker.random.words(), user_id: 2 },
     { notes: faker.random.words(), user_id: 3 },
-    { notes: faker.random.words(), user_id: 3 },
+    { notes: faker.random.words(), user_id: 4 },
   ]);
 };
