@@ -7,6 +7,7 @@ const morgan = require("morgan");
 //import routers
 const welcomeRouter = require("../welcome/welcome-router");
 const weatherRouter = require("../weather/weather-router");
+const userRouter = require("../users/users-router");
 
 //global middleware
 server.use(express.json(), helmet(), cors(), morgan("dev"));
@@ -14,6 +15,7 @@ server.use(express.json(), helmet(), cors(), morgan("dev"));
 //GET endpoints---->
 server.use("/", welcomeRouter);
 server.use("/api/weather", weatherRouter);
+server.use("/api/users", userRouter);
 
 //middleware for catch on routers
 server.use((err, req, res) => {
