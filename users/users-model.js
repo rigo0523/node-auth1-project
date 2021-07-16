@@ -5,6 +5,7 @@ module.exports = {
   getUsersById,
   updateUserEmail,
   deleteUser,
+  getUserLocation,
 };
 
 //USERS CRUD
@@ -41,6 +42,25 @@ function updateUserEmail(id, changes) {
 //DELETE --- /api/users/:id ---> remove the user
 function deleteUser(id) {
   return db("users").where({ id }).del();
+}
+
+//GET /api/users/:id/locations
+function getUserLocation(id, powers) {
+  return db("user_location")
+    .join("users", "users.id", "=", "user_location.user_id")
+    .join("roles", "roles.id", "=", "users.role_id")
+    .join("locations", "locations.id", "user_location.location_id")
+    .where({ "user_location.user_id": id })
+    .select(
+      "users.id",
+      "username",
+      "email",
+      "roles.role",
+      "city",
+      "age",
+      "powers"
+    )
+    .first();
 }
 
 //----------------------AUTH REGISTER/LOGIN-------------------//

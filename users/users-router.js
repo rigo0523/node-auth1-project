@@ -41,4 +41,16 @@ router.delete("/:id", (req, res, next) => {
     .catch((err) => next(err));
 });
 
+//GET /api/users/:id/locations
+router.get("/:id/locations", (req, res, next) => {
+  const { id } = req.params;
+  Users.getUserLocation(id)
+    .then((user) => {
+      console.log("user---->", user);
+      user.powers = Boolean(user.powers);
+      res.json(user);
+    })
+    .catch((err) => next(err));
+});
+
 module.exports = router;
