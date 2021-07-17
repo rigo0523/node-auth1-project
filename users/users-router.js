@@ -51,6 +51,9 @@ router.get("/:id/locations", (req, res, next) => {
       res.json(user);
     })
     .catch((err) => next(err));
-});
+}); //
+
+//POST
+router.get("/:id/tasks", (req, res, next) => {});
 
 module.exports = router;
