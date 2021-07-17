@@ -53,6 +53,9 @@ router.get("/:id/locations", (req, res, next) => {
     .catch((err) => next(err));
 }); //
 
+//POST /api/users/:id/locations
+router.post("/:id/locations", (req, res, next) => {});
+
 //POST
 router.get("/:id/tasks", (req, res, next) => {});
 
