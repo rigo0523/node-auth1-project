@@ -56,7 +56,12 @@ router.get("/:id/locations", (req, res, next) => {
 //POST /api/users/:id/locations
 router.post("/:id/locations", (req, res, next) => {});
 
+//GET /api/users/:Id/tasks
+router.get("/:id", (req, res, next) => {})
+
 //POST
 router.get("/:id/tasks", (req, res, next) => {});
+
+
 
 module.exports = router;
