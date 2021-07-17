@@ -59,7 +59,7 @@ router.post("/:id/locations", (req, res, next) => {});
 //GET /api/users/:Id/tasks
 router.get("/:id", (req, res, next) => {})
 
-//POST
+//POST /api/users/:id/tasks
 router.get("/:id/tasks", (req, res, next) => {});
 
 
