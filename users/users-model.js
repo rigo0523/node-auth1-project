@@ -6,6 +6,7 @@ module.exports = {
   updateUserEmail,
   deleteUser,
   getUserLocation,
+  postUserLocation,
 };
 
 //USERS CRUD
@@ -61,6 +62,16 @@ function getUserLocation(id, powers) {
       "powers"
     )
     .first();
+}
+
+//POST /api/users/:id/locations
+function postUserLocation(postData, userID) {
+  return db("locations")
+    .insert(postData)
+    .then((ids) => {
+      console.log("ids--->", ids, "userID---->", userID);
+      return db("user_location").insert({ user_id: ids, location_id: userID });
+    });
 }
 
 //----------------------AUTH REGISTER/LOGIN-------------------//
